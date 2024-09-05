@@ -1,0 +1,19 @@
+vsim -gui work.synchronizer_tb
+# vsim -gui work.synchronizer_tb 
+# Start time: 13:40:11 on Sep 05,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading std.env(body)
+# Loading work.synchronizer_tb(testbench)
+# Loading work.synchronizer(synchronizer_arch)
+# Loading work.dflipflop(dflipflop_arch)
+# WARNING: No extended dataflow license exists
+add wave sim:/synchronizer_tb/*
+run
+# ** Note: all tests passed!
+#    Time: 100 ns  Iteration: 0  Instance: /synchronizer_tb
+# 1
+# Break in Process check_output at C:/Users/Caleb/Documents/EELE 467/labs-and-homework-CalebEELe467/sim/synchronizer/synchronizer_tb.vhd line 111
+# End time: 13:47:39 on Sep 05,2024, Elapsed time: 0:07:28
+# Errors: 0, Warnings: 2
