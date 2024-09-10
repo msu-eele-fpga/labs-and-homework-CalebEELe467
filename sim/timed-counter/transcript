@@ -1,0 +1,53 @@
+vsim -gui work.timed_counter_tb
+# vsim -gui work.timed_counter_tb 
+# Start time: 21:15:56 on Sep 09,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.print_pkg(body)
+# Loading ieee.fixed_float_types
+# Loading ieee.math_real(body)
+# Loading ieee.fixed_generic_pkg(body)
+# Loading ieee.float_generic_pkg(body)
+# Loading ieee.fixed_pkg
+# Loading ieee.float_pkg
+# Loading work.assert_pkg(body)
+# Loading work.tb_pkg(body)
+# Loading work.timed_counter_tb(testbench)
+# Loading work.timed_counter(timed_counter_arch)
+# WARNING: No extended dataflow license exists
+add wave sim:/timed_counter_tb/*
+run
+# testing 100 ns timer: enabled
+# testing 100 ns timer: enabled
+# ** Failure: error in test case 'counter not done'
+#    Time: 171 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 191 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 211 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 231 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 251 ns  Iteration: 0  Instance: /timed_counter_tb
+# testing 100 ns timer: enabled
+# ** Failure: error in test case 'counter not done'
+#    Time: 311 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 331 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 351 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 371 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 391 ns  Iteration: 0  Instance: /timed_counter_tb
+# testing 100 ns timer: enabled
+# ** Failure: error in test case 'counter not done'
+#    Time: 451 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 471 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 491 ns  Iteration: 0  Instance: /timed_counter_tb
+# End time: 21:21:08 on Sep 09,2024, Elapsed time: 0:05:12
+# Errors: 13, Warnings: 1
