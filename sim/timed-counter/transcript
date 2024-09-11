@@ -1,6 +1,12 @@
+# Compile of print_pkg.vhd was successful.
+# Compile of assert_pkg.vhd was successful.
+# Compile of tb_pkg.vhd was successful.
+# Compile of timed_counter_tb.vhd was successful with warnings.
+# Compile of timed_counter.vhd was successful.
+# 5 compiles, 0 failed with no errors.
 vsim -gui work.timed_counter_tb
 # vsim -gui work.timed_counter_tb 
-# Start time: 21:15:56 on Sep 09,2024
+# Start time: 18:24:42 on Sep 10,2024
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -18,6 +24,8 @@ vsim -gui work.timed_counter_tb
 # Loading work.timed_counter(timed_counter_arch)
 # WARNING: No extended dataflow license exists
 add wave sim:/timed_counter_tb/*
+add wave  \
+sim:/timed_counter_tb/dut_100ns_counter/count
 run
 # testing 100 ns timer: enabled
 # testing 100 ns timer: enabled
@@ -49,5 +57,3 @@ run
 #    Time: 471 ns  Iteration: 0  Instance: /timed_counter_tb
 # ** Failure: error in test case 'counter not done'
 #    Time: 491 ns  Iteration: 0  Instance: /timed_counter_tb
-# End time: 21:21:08 on Sep 09,2024, Elapsed time: 0:05:12
-# Errors: 13, Warnings: 1
