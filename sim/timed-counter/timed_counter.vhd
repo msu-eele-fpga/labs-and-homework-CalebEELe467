@@ -32,6 +32,9 @@ architecture timed_counter_arch of timed_counter is
 			  count <= count + 1;
 				if(count = COUNTER_LIMIT) then
 				  done <= true;
+				  count <= 0;
+				else
+					done <= false;
 				end if;
 			else 
 				count <= 0;
