@@ -1,0 +1,63 @@
+# Compile of print_pkg.vhd was successful.
+# Compile of assert_pkg.vhd was successful.
+# Compile of tb_pkg.vhd was successful.
+# Compile of timed_counter_tb.vhd was successful with warnings.
+# Compile of timed_counter.vhd was successful.
+# 5 compiles, 0 failed with no errors.
+vsim -gui work.timed_counter_tb
+# vsim -gui work.timed_counter_tb 
+# Start time: 18:24:42 on Sep 10,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.print_pkg(body)
+# Loading ieee.fixed_float_types
+# Loading ieee.math_real(body)
+# Loading ieee.fixed_generic_pkg(body)
+# Loading ieee.float_generic_pkg(body)
+# Loading ieee.fixed_pkg
+# Loading ieee.float_pkg
+# Loading work.assert_pkg(body)
+# Loading work.tb_pkg(body)
+# Loading work.timed_counter_tb(testbench)
+# Loading work.timed_counter(timed_counter_arch)
+# WARNING: No extended dataflow license exists
+add wave sim:/timed_counter_tb/*
+add wave  \
+sim:/timed_counter_tb/dut_100ns_counter/count
+run
+# testing 100 ns timer: enabled
+# testing 100 ns timer: enabled
+# ** Failure: error in test case 'counter not done'
+#    Time: 171 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 191 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 211 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 231 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 251 ns  Iteration: 0  Instance: /timed_counter_tb
+# testing 100 ns timer: enabled
+# ** Failure: error in test case 'counter not done'
+#    Time: 311 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 331 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 351 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 371 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 391 ns  Iteration: 0  Instance: /timed_counter_tb
+# testing 100 ns timer: enabled
+# ** Failure: error in test case 'counter not done'
+#    Time: 451 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 471 ns  Iteration: 0  Instance: /timed_counter_tb
+# ** Failure: error in test case 'counter not done'
+#    Time: 491 ns  Iteration: 0  Instance: /timed_counter_tb
+# Project file C:/Users/Caleb/Documents/EELE 467/labs-and-homework-CalebEELe467/sim/timed-counter/timed-counter-sim.mpf is write protected, data cannot be saved.
+# Unable to save project.
+# End time: 18:44:42 on Sep 10,2024, Elapsed time: 0:20:00
+# Errors: 13, Warnings: 1
