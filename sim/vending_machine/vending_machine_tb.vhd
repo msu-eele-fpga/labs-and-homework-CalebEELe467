@@ -1,3 +1,4 @@
+
 -- Copyright 2106 Ricardo Jasinski
 -- from the book Effective Coding with VHDL by Ricardo Jasinski
 -- SPDX-License-Identifier: CC0-1.0
@@ -120,5 +121,4 @@ begin
     assert_eq(dispense_predicted, dispense_tb, "dispense is as expected");
 
   end process response_checker;
-
 end architecture testbench;
