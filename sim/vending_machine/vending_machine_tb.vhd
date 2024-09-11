@@ -121,5 +121,4 @@ begin
     assert_eq(dispense_predicted, dispense_tb, "dispense is as expected");
 
   end process response_checker;
-
 end architecture testbench;
