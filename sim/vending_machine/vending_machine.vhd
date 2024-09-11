@@ -28,6 +28,8 @@ begin
 	begin
 		if(rst = '1') then
 		  state <= c0;
+		  dispense <= '0';
+		  amount <= 0;
 		elsif rising_edge(clk) then
 		  case state is
 			when c0 =>

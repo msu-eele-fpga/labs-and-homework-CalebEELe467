@@ -1,43 +1,6 @@
 vsim -gui work.vending_macine_tb
 # vsim -gui work.vending_macine_tb 
-# Start time: 20:46:36 on Sep 10,2024
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading ieee.fixed_float_types
-# Loading ieee.math_real(body)
-# Loading ieee.fixed_generic_pkg(body)
-# Loading ieee.float_generic_pkg(body)
-# Loading ieee.fixed_pkg
-# Loading ieee.float_pkg
-# Loading work.assert_pkg(body)
-# Loading work.print_pkg(body)
-# Loading work.tb_pkg(body)
-# Loading std.env(body)
-# Loading work.vending_macine_tb(testbench)
-# Loading work.vending_machine(vending_machine_arch)
-add wave -position insertpoint sim:/vending_macine_tb/*
-run -all
-# ** Failure: error in test case 'dispense is as expected'
-#      actual: 0, expected: U
-#    Time: 11 ns  Iteration: 0  Instance: /vending_macine_tb
-# ** Failure: error in test case 'dispense is as expected'
-#      actual: 0, expected: U
-#    Time: 31 ns  Iteration: 0  Instance: /vending_macine_tb
-# End of testbench.
-# 1
-# Break in Process stimuli_generator at C:/Users/Caleb/Documents/EELE 467/labs-and-homework-CalebEELe467/sim/vending_machine/vending_machine_tb.vhd line 73
-# Break key hit
-run -all
-run -all
-restart
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-vsim -gui work.vending_macine_tb
-# End time: 20:50:31 on Sep 10,2024, Elapsed time: 0:03:55
-# Errors: 0, Warnings: 1
-# vsim -gui work.vending_macine_tb 
-# Start time: 20:50:31 on Sep 10,2024
+# Start time: 11:12:20 on Sep 11,2024
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -64,35 +27,14 @@ run -all
 # End of testbench.
 # 1
 # Break in Process stimuli_generator at C:/Users/Caleb/Documents/EELE 467/labs-and-homework-CalebEELe467/sim/vending_machine/vending_machine_tb.vhd line 73
-add wave sim:/vending_macine_tb/*
-restart
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-run -all
-# GetModuleFileName: The specified module could not be found.
-# 
-# 
-# ** Failure: error in test case 'dispense is as expected'
-#      actual: 0, expected: U
-#    Time: 11 ns  Iteration: 0  Instance: /vending_macine_tb
-# ** Failure: error in test case 'dispense is as expected'
-#      actual: 0, expected: U
-#    Time: 31 ns  Iteration: 0  Instance: /vending_macine_tb
-# End of testbench.
-# 1
-# Break in Process stimuli_generator at C:/Users/Caleb/Documents/EELE 467/labs-and-homework-CalebEELe467/sim/vending_machine/vending_machine_tb.vhd line 73
-# A time value could not be extracted from the current line
-# A time value could not be extracted from the current line
-# A time value could not be extracted from the current line
-# A time value could not be extracted from the current line
-# A time value could not be extracted from the current line
-# A time value could not be extracted from the current line
-# A time value could not be extracted from the current line
 # Compile of print_pkg.vhd was successful.
 # Compile of assert_pkg.vhd was successful.
 # Compile of tb_pkg.vhd was successful.
 # Compile of vending_machine.vhd was successful.
 # Compile of vending_machine_tb.vhd was successful with warnings.
 # 5 compiles, 0 failed with no errors.
+add wave sim:/vending_macine_tb/*
+run -all
 restart
 # ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
 # Loading work.assert_pkg(body)
@@ -113,13 +55,108 @@ run -all
 # End of testbench.
 # 1
 # Break in Process stimuli_generator at C:/Users/Caleb/Documents/EELE 467/labs-and-homework-CalebEELe467/sim/vending_machine/vending_machine_tb.vhd line 73
-# A time value could not be extracted from the current line
-# A time value could not be extracted from the current line
-add wave -position insertpoint sim:/vending_macine_tb/duv/state_machine/*
-# ** UI-Msg: (vish-4014) No objects found matching '/vending_macine_tb/duv/state_machine/*'.
-add wave sim:/vending_macine_tb/duv/state_machine/*
-# ** UI-Msg: (vish-4014) No objects found matching '/vending_macine_tb/duv/state_machine/*'.
-# A time value could not be extracted from the current line
-# A time value could not be extracted from the current line
-# End time: 21:00:15 on Sep 10,2024, Elapsed time: 0:09:44
-# Errors: 2, Warnings: 1
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# ** Failure: error in test case 'dispense is as expected'
+#      actual: 0, expected: U
+#    Time: 11 ns  Iteration: 0  Instance: /vending_macine_tb
+# ** Failure: error in test case 'dispense is as expected'
+#      actual: 0, expected: U
+#    Time: 31 ns  Iteration: 0  Instance: /vending_macine_tb
+run
+# End of testbench.
+# 1
+# Break in Process stimuli_generator at C:/Users/Caleb/Documents/EELE 467/labs-and-homework-CalebEELe467/sim/vending_machine/vending_machine_tb.vhd line 73
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+restart
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Failure: error in test case 'dispense is as expected'
+#      actual: 0, expected: U
+#    Time: 11 ns  Iteration: 0  Instance: /vending_macine_tb
+# ** Failure: error in test case 'dispense is as expected'
+#      actual: 0, expected: U
+#    Time: 31 ns  Iteration: 0  Instance: /vending_macine_tb
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+# ** Failure: error in test case 'dispense is as expected'
+#      actual: 0, expected: U
+#    Time: 11 ns  Iteration: 0  Instance: /vending_macine_tb
+# ** Failure: error in test case 'dispense is as expected'
+#      actual: 0, expected: U
+#    Time: 31 ns  Iteration: 0  Instance: /vending_macine_tb
+# Compile of print_pkg.vhd was successful.
+# Compile of assert_pkg.vhd was successful.
+# Compile of tb_pkg.vhd was successful.
+# Compile of vending_machine.vhd failed with 3 errors.
+# Compile of vending_machine_tb.vhd was successful with warnings.
+# 5 compiles, 1 failed with 3 errors.
+# Compile of print_pkg.vhd was successful.
+# Compile of assert_pkg.vhd was successful.
+# Compile of tb_pkg.vhd was successful.
+# Compile of vending_machine.vhd failed with 2 errors.
+# Compile of vending_machine_tb.vhd was successful with warnings.
+# 5 compiles, 1 failed with 2 errors.
+# Compile of print_pkg.vhd was successful.
+# Compile of assert_pkg.vhd was successful.
+# Compile of tb_pkg.vhd was successful.
+# Compile of vending_machine.vhd was successful.
+# Compile of vending_machine_tb.vhd was successful with warnings.
+# 5 compiles, 0 failed with no errors.
+vsim -gui work.vending_macine_tb
+# End time: 11:35:08 on Sep 11,2024, Elapsed time: 0:22:48
+# Errors: 2, Warnings: 4
+# vsim -gui work.vending_macine_tb 
+# Start time: 11:35:08 on Sep 11,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.fixed_float_types
+# Loading ieee.math_real(body)
+# Loading ieee.fixed_generic_pkg(body)
+# Loading ieee.float_generic_pkg(body)
+# Loading ieee.fixed_pkg
+# Loading ieee.float_pkg
+# Loading work.assert_pkg(body)
+# Loading work.print_pkg(body)
+# Loading work.tb_pkg(body)
+# Loading std.env(body)
+# Loading work.vending_macine_tb(testbench)
+# Loading work.vending_machine(vending_machine_arch)
+add wave sim:/vending_macine_tb/*
+run -all
+# End of testbench.
+# 1
+# Break in Process stimuli_generator at C:/Users/Caleb/Documents/EELE 467/labs-and-homework-CalebEELe467/sim/vending_machine/vending_machine_tb.vhd line 73
