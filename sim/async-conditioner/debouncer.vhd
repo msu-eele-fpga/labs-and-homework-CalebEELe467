@@ -36,21 +36,25 @@ begin
 		end if;
 		end process state_memory;
 
-	next_state_process : process( current_state, input)
+	next_state_process : process( current_state, input, clk)
 		begin	
 		case current_state is
 			when not_pressed =>
-				if (input = '1') then
+				if ((input = '1') and (amount = 0)) then
 					next_state <= pressed;
-				else
+				elsif ( amount > 0) then
+					next_state <= not_pressed;
+					amount <= amount -1;
+				else 
 					next_state <= not_pressed;
 				end if;
 			when pressed =>
-				if (amount < ((debounce_time / clk_period) -1)) then
+				if (amount < (debounce_time / clk_period)) then
 					amount <= amount +1;
 					next_state <= pressed;
-				else 
-					amount <= 0;
+				elsif ( input = '1') then	
+					next_state <= pressed;
+				else
 					next_state <= not_pressed;
 				end if;
 			end case;
