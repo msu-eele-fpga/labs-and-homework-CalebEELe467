@@ -11,14 +11,14 @@ entity async_conditioner is
 end entity async_conditioner;
 
 architecture async_conditioner_arch of async_conditioner is
-  signal sync_to_debouncer      : std_ulogic := '0';
-  signal debouncer_to_one_pulse : std_ulogic := '0';
+  signal sync_to_debouncer      : std_ulogic;
+  signal debouncer_to_one_pulse : std_ulogic;
 
   component synchronizer is
     port (
       clk   : in std_ulogic;
       async : in std_ulogic;
-      sync  : in std_ulogic
+      sync  : out std_ulogic
     );
   end component synchronizer;
 
@@ -31,7 +31,7 @@ architecture async_conditioner_arch of async_conditioner is
       clk       : in std_ulogic;
       rst       : in std_ulogic;
       input     : in std_ulogic;
-      debounced : in std_ulogic
+      debounced : out std_ulogic
     );
   end component debouncer;
 
@@ -56,7 +56,7 @@ begin
   generic map
   (
     clk_period    => 20 ns,
-    debounce_time => 1000 ns
+    debounce_time => 100 ns
   )
   port map
   (
