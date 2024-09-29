@@ -7,3 +7,6 @@ Create a System on the DE10-nano to produce Variious LED Patterns based on dip s
 
 ### System Block Diagram
 ![Lab-4 System Block Diagram](./assets/Lab_4_System_Block_diagram.png)
+
+### State Diagram
+![Lab-4 State Diagram](./assets/Lab_4_State_Diagram.png)
