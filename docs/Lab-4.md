@@ -23,7 +23,7 @@ The Goal of this lab was to create a VHDL project that allowed the user to choos
 
  For System Layout see [System Description](./assets/led_patterns.html)
 
- The state diagram allows for transitions from idle to holding the input of the switches and displaying that input on the LEDs for a second when the button is pressed. Then it transitions to the input state from the switches. Each state has its own unique timer that when asserted adjusts the output to the LED's.
+ The state diagram allows for transitions from idle to holding the input of the switches and displaying that input on the LEDs for a second when the button is pressed. Then it transitions to the input state from the switches. Each state has its own unique timer that when asserted adjusts the output to the LEDs.
 
  ## Implementation Details
  The unique pattern created alternated toggling every other bit on the leds at a rate of 3 times the base rate of the clock. It appears that the light is shifting left and right reapeatedly. 

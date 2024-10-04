@@ -112,7 +112,6 @@ use work.print_pkg.all;
 use work.tb_pkg.all;
 
 
-entity debouncer is 
 	generic (
 		  clk_period	: time := 20 ns;
 		  debounce_time	: time 
