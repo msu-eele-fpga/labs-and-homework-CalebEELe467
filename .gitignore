@@ -68,7 +68,6 @@ dkms.conf
 *.qar
 *.qarlog
 *.qws
-*.qpf
 *.rpt
 *.smsg
 *.sof
