@@ -31,6 +31,7 @@ architecture led_patterns_arch of led_patterns is
   signal after_decimal  : integer := 0;
 
   signal output_integer : integer range 0 to 127 := 0;
+  signal led_7          : std_ulogic             := '0';
   signal start_output   : std_ulogic             := '0';
 
   signal hold_state_led : std_ulogic_vector(3 downto 0) := "0000";
@@ -286,7 +287,8 @@ begin
     end case;
   end process timer_setup;
 
-  timer_based_output : process (global_done, one_second_done, base_period_done, current_state, clk)
+  timer_based_output : process (global_done, one_second_done, base_period_done, current_state, clk
+    )
   begin
     if (current_state = idle) then
       led(7 downto 0) <= "00000000";
@@ -309,7 +311,8 @@ begin
       end case;
     else
       if base_period_done = true and rising_edge(clk) then
-        led(7) <= '1' xor led(7);
+        led_7  <= not led_7;
+        led(7) <= led_7;
       else
         -- Do nothing
       end if;
