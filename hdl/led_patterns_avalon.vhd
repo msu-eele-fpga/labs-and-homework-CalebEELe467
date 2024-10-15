@@ -19,10 +19,10 @@ entity led_patterns_avalon is
 end entity led_patterns_avalon;
 
 architecture led_patterns_avalon_arch of led_patterns_avalon is
-  signal hps_led_control : std_logic_vector (31 downto 0) := "00000000000000000000000000000000";
-  signal base_period     : std_logic_vector (31 downto 0) := "00000000000000000000000000001000";
-  signal led_reg         : std_logic_vector (31 downto 0) := "00000000000000000000000000000000";
-
+  signal hps_led_control     : std_logic_vector (31 downto 0) := "00000000000000000000000000000000";
+  signal base_period         : std_logic_vector (31 downto 0) := "00000000000000000000000000001000";
+  signal led_reg             : std_logic_vector (31 downto 0) := "00000000000000000000000000000000";
+  signal led_control_boolean : boolean                        := false;
   component led_patterns is
     generic (
       system_clock_period : time := 20 ns
@@ -48,11 +48,20 @@ begin
     rst             => rst,
     push_button     => push_button,
     switches        => switches,
-    hps_led_control => FALSE,
+    hps_led_control => led_control_boolean,
     base_period     => unsigned(base_period(7 downto 0)),
     led_reg         => led_reg(7 downto 0),
     led             => led
   );
+
+  hps_led_control_process : process (clk)
+  begin
+    if hps_led_control(0) = '1' then
+      led_control_boolean <= true;
+    else
+      led_control_boolean <= false;
+    end if;
+  end process hps_led_control_process;
 
   avalon_register_read : process (clk)
   begin

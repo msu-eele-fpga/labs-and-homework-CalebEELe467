@@ -332,7 +332,7 @@ begin
       -- HPS user I/O
       hps_io_hps_io_gpio_inst_gpio53 => hps_led,
       hps_io_hps_io_gpio_inst_gpio54 => hps_key,
-      led_patterns_push_button       =>  push_button_n(0),
+      led_patterns_push_button       => not push_button_n(0),
       led_patterns_switches          => sw(3 downto 0),
       led_patterns_led               => led(7 downto 0),
 
