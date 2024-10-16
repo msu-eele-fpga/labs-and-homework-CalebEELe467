@@ -207,9 +207,7 @@ begin
   -- Process for output
   State_memory : process (clk, rst, hps_led_control)
   begin
-    if (hps_led_control = true) then
-      --led <= "01010101";
-    elsif (rst = '1') then
+    if (rst = '1') then
       current_state <= idle;
     elsif (rising_edge(clk)) then
       current_state <= next_state;
@@ -290,73 +288,77 @@ begin
   timer_based_output : process (global_done, one_second_done, base_period_done, current_state, clk
     )
   begin
-    if (current_state = idle) then
-      led(7 downto 0) <= "00000000";
-    elsif (current_state = hold) then
-      led(3 downto 0) <= hold_state_led;
-      led(7 downto 4) <= "0000";
-      case post_hold_state is
-        when state0 =>
-          output_integer <= 64;
-        when state1 =>
-          output_integer <= 3;
-        when state2 =>
-          output_integer <= 0;
-        when state3 =>
-          output_integer <= 127;
-        when state4 =>
-          output_integer <= 85;
-        when others =>
-          output_integer <= 0;
-      end case;
+    if (hps_led_control = true) then
+      led <= led_reg;
     else
-      if base_period_done = true and rising_edge(clk) then
-        led_7  <= not led_7;
-        led(7) <= led_7;
-      else
-        -- Do nothing
-      end if;
-      if global_done = true and rising_edge(clk) then
-        case current_state is
+      if (current_state = idle) then
+        led(7 downto 0) <= "00000000";
+      elsif (current_state = hold) then
+        led(3 downto 0) <= hold_state_led;
+        led(7 downto 4) <= "0000";
+        case post_hold_state is
           when state0 =>
-            if (output_integer > 1) then
-              output_integer <= output_integer / 2;
-            else
-              output_integer <= 64;
-            end if;
+            output_integer <= 64;
           when state1 =>
-            if (output_integer < 64) then
-              output_integer <= output_integer * 2;
-            elsif output_integer = 96 then
-              output_integer <= 65;
-            else
-              output_integer <= 3;
-            end if;
+            output_integer <= 3;
           when state2 =>
-            if (output_integer < 127) then
-              output_integer <= output_integer + 1;
-            else
-              output_integer <= 0;
-            end if;
+            output_integer <= 0;
           when state3 =>
-            if (output_integer > 0) then
-              output_integer <= output_integer - 1;
-            else
-              output_integer <= 64;
-            end if;
+            output_integer <= 127;
           when state4 =>
-            if output_integer = 85 then
-              output_integer <= 42;
-            else
-              output_integer <= 85;
-            end if;
+            output_integer <= 85;
           when others =>
             output_integer <= 0;
         end case;
       else
-        -- Do Nothing
+        if base_period_done = true and rising_edge(clk) then
+          led_7  <= not led_7;
+          led(7) <= led_7;
+        else
+          -- Do nothing
+        end if;
+        if global_done = true and rising_edge(clk) then
+          case current_state is
+            when state0 =>
+              if (output_integer > 1) then
+                output_integer <= output_integer / 2;
+              else
+                output_integer <= 64;
+              end if;
+            when state1 =>
+              if (output_integer < 64) then
+                output_integer <= output_integer * 2;
+              elsif output_integer = 96 then
+                output_integer <= 65;
+              else
+                output_integer <= 3;
+              end if;
+            when state2 =>
+              if (output_integer < 127) then
+                output_integer <= output_integer + 1;
+              else
+                output_integer <= 0;
+              end if;
+            when state3 =>
+              if (output_integer > 0) then
+                output_integer <= output_integer - 1;
+              else
+                output_integer <= 64;
+              end if;
+            when state4 =>
+              if output_integer = 85 then
+                output_integer <= 42;
+              else
+                output_integer <= 85;
+              end if;
+            when others =>
+              output_integer <= 0;
+          end case;
+        else
+          -- Do Nothing
+        end if;
+        led(6 downto 0) <= std_ulogic_vector(to_unsigned(output_integer, 7));
       end if;
-      led(6 downto 0) <= std_ulogic_vector(to_unsigned(output_integer, 7));
     end if;
   end process timer_based_output;
 end architecture led_patterns_arch;
