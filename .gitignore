@@ -98,6 +98,7 @@ incremental_db/
 output_files/
 work/
 quartus/**/simulation/
+*.tcl~
 
 # Questa files
 vsim.wlf
@@ -106,4 +107,5 @@ work/
 transcript
 
 
-
+# Vim swap files
+*.swp
