@@ -14,7 +14,7 @@ Familierized myself with various command line tools in linux.
 ### Problem 2 
 `wc -m lorem-ipsum.txt`
 
-![Problem 2 output](/docs/assets/hw-7_assets/Problem2.png)
+![Problem 2 output](/docs/assets/hw-7_assets/problem2.png)
 
 ### Problem 3 
 `wc -l lorem-ipsum.txt`
