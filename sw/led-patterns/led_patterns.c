@@ -22,23 +22,24 @@ int main(int argc, char **argv)
 {
     int c;
 
-    int hflag, vflag, fflag, pflag = 0;
+    int vflag, fflag, pflag = 0;
     char *fvalue, *pvalue = NULL;
 
     while ((c = getopt(argc, argv, "hvf:p:")) ! = -1)
     {
+        fprintf(stderr, "arguments %d", argc);
         switch (c)
         {
-        case 'h':
-            hflag = 1;
+        case 'h': // Prints Help Menu
+            usage();
             break;
-        case 'v':
+        case 'v': // Verbose Mode
             vflag = 1;
             break;
-        case 'f':
+        case 'f': // Read file
             fflag = 1;
             break;
-        case 'p':
+        case 'p': // Manual Pattern Input
             pflag = 1;
             break;
         }
