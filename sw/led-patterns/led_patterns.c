@@ -5,6 +5,15 @@
 #include <sys/mman.h> // for mmap
 #include <fcntl.h>    // for file open flags
 #include <unistd.h>   // for getting the page size
+#include <signal.h>   // Dealing with CTRL C
+
+static volatile int KeepRunning = 1;
+
+void intHandler(int dummy) 
+{
+    KeepRunning = 0;
+    fprintf(stderr, "\nProgram Cancelled\n");
+}
 
 void usage()
 {
@@ -20,14 +29,19 @@ void usage()
 
 int main(int argc, char **argv)
 {
-    int c;
+   if(argc == 1) // if no input arguments print help menu and exit
+        {
+            usage();
+        }
 
+    int c;
+    //int optind;
     int vflag, fflag, pflag = 0;
-    char *fvalue, *pvalue = NULL;
         //NOtes for me : argc stores input options +1
-    while ((c = getopt(argc, argv, "hvf:p:")) != -1)
+    
+    while (((c = getopt(argc, argv, "hvf:p:")) != -1) && (KeepRunning == 1))
     {
-        fprintf(stderr, "arguments %d \n", argc);
+        
         switch (c)
         {
         case 'h': // Prints Help Menu
@@ -39,15 +53,36 @@ int main(int argc, char **argv)
             break;
         case 'f': // Read file
             fflag = 1;
+            if(pflag)
+            {
+                fprintf(stderr, "Error: Arguments p and f cannot be given together\n");
+            }
+            KeepRunning = 0;
             break;
         case 'p': // Manual Pattern Input
-            pflag = 1;
-            optind--;
-            for( ;optind < argc && *argv[optind] != '-'; (optind+= 2)){
-                fprintf(stderr, "the hex value is %s \n", argv[optind]);
-                fprintf(stderr, "the time value is %d \n", argv[optind++]);
+            pflag = 1;    
+            if(fflag)
+            {
+                fprintf(stderr, "Error: Arguments p and f cannot be given together\n");
             }
+            KeepRunning = 0;
             break;
+        case '?':   // If unknown input print help menu and exit
+            usage();
+            KeepRunning = 0;
+            break;
+        }       
+
+        optind--;
+        while(pflag == 1 && KeepRunning == 1)
+        {   
+            
+         for (int i = optind; i < argc; i+=2)
+         {
+            fprintf(stderr, "LED pattern = %s\t Display time = %s ms\n",argv[i], argv[i+1]);
+          }
+          signal(SIGINT, intHandler);
         }
+        
     }
 }
