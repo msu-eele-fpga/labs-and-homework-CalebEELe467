@@ -14,7 +14,8 @@ static volatile int KeepRunning = 1;
 void intHandler(int dummy)
 {
     KeepRunning = 0;
-    fprintf(stderr, "\nProgram Cancelled\n");
+    
+}
 
     void usage()
     {
@@ -94,24 +95,20 @@ void intHandler(int dummy)
         }
 
         int fd = open("/dev/mem", O_RDWR | O_SYNC);
-        if (fd == -1)
+        if(fd == -1)
         {
             fprintf(stderr, "failed to open /dev/mem.\n");
             exit(1);
         }
         // ------ Put In Software Control Mode ----------
         uint32_t page_aligned_addr = CONTROL_REG & ~(PAGE_SIZE - 1);
-        printf("page aligned address = 0x%x\n", page_aligned_addr);
         uint32_t *page_virtual_addr = (uint32_t *)mmap(NULL, PAGE_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, page_aligned_addr);
         if (page_virtual_addr == MAP_FAILED)
         {
             fprintf(stderr, "failed to map memory.\n");
         }
-        fprintf(stderr, "page_virtual_address = %p\n", page_virtual_addr);
         uint32_t offset_in_page = CONTROL_REG & (PAGE_SIZE - 1);
-        fprintf(stderr, "offset in page = 0x%x\n", offset_in_page);
         uint32_t *target_virtual_addr = page_virtual_addr + offset_in_page / sizeof(uint32_t *);
-        fprintf(stderr, "target virtual addr = %p\n\n\n", target_virtual_addr);
         uint32_t VALUE = 1;
         *target_virtual_addr = VALUE;
         usleep(500 * 1000);
@@ -120,17 +117,14 @@ void intHandler(int dummy)
         // ----- Calculate address of LED_REG-----------
 
         uint32_t page_aligned_addr2 = LED_REG & ~(PAGE_SIZE - 1);
-        printf("page aligned address = 0x%x\n", page_aligned_addr2);
         uint32_t *page_virtual_addr2 = (uint32_t *)mmap(NULL, PAGE_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, page_aligned_addr2);
         if (page_virtual_addr2 == MAP_FAILED)
         {
             fprintf(stderr, "failed to map memory.\n");
         }
-        fprintf(stderr, "page_virtual_address = %p\n", page_virtual_addr2);
         uint32_t offset_in_page2 = LED_REG & (PAGE_SIZE - 1);
-        fprintf(stderr, "offset in page = 0x%x\n", offset_in_page2);
         uint32_t *target_virtual_addr2 = page_virtual_addr2 + offset_in_page2 / sizeof(uint32_t *);
-        fprintf(stderr, "target virtual addr = %p\n\n\n", target_virtual_addr2);
+        
 
         //------------------------------------------------------------------
 
@@ -158,7 +152,7 @@ void intHandler(int dummy)
         if (fflag == 1 && KeepRunning == 1)
         {
             FILE *fptr;
-            char line[256];
+            char line[50];
             char *Output;
             char *Output2;
 
@@ -167,20 +161,25 @@ void intHandler(int dummy)
             while (fgets(line, sizeof(line), fptr) != NULL)
             {
                 Output = strtok(line, " ");
-
+              
                 while (Output != NULL)
                 {
-                    fprintf(stderr, "LED Patterns = %s\t", Output);
+                    
                     Output2 = strtok(NULL, "\n");
+                    if(vflag)
+                    {
+                    fprintf(stderr, "LED Patterns = %s\t", Output);
                     fprintf(stderr, "Display time = %sms\n", Output2);
-                    Output = strtok(NULL, " ");
-
-                    /*
-                    Do FPGA memory Stuff Here
-                    */
+                    }
+                    uint32_t VALUE = strtoul(Output, NULL, 0);
+                    *target_virtual_addr2 = VALUE;
                     usleep(strtoul(Output2, NULL, 0) * 1000); // Convers ms String into int of microseconds then sleeps
+                    Output = strtok(NULL, " ");
+                    
+              
                 }
             }
         }
         *target_virtual_addr = 0;
+        fprintf(stderr, "\nProgram Ended\nThe system is now in Hardware Control Mode\n");
     }
