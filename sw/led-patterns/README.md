@@ -11,6 +11,7 @@ Led Patterns is is a C program that interacts directly with registers on the SOC
 
 ### Command Line input in Verbose Mode
 `sudo ./led_patterns -v -p 0xf0 500 0x0f 500 0xff 500`
+
 ![Command Line Input Terminal](/docs/assets/led_patterns/CommandLineInput.png)
 
 >[!NOTE] 
