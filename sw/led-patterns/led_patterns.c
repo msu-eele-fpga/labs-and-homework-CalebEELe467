@@ -19,9 +19,9 @@ void intHandler(int dummy)
 
     void usage()
     {
-        fprintf(stderr, "led_patterns [OPTION]... [ARGUMENT]...\n");
-        fprintf(stderr, "Control FPGA LED Outputs\n");
-        fprintf(stderr, "Example: led_patterns -v stuff Here");
+        fprintf(stderr, "Usage: led_patterns [OPTION] [foo]...\n");
+        fprintf(stderr, "Control FPGA LED Outputs\n\n");
+        fprintf(stderr, "Example: led_patterns -v -p 0xf0 500\n\n");
         fprintf(stderr, "Input Arguments:\n");
         fprintf(stderr, "\t-h\t Print this help Menu and exit\n");
         fprintf(stderr, "\t-v\t Verbose Mode. Prints LED Pattern in binary and the display duration\n");
@@ -136,7 +136,7 @@ void intHandler(int dummy)
             {
                 if (vflag == 1)
                 {
-                    fprintf(stderr, "LED pattern = %s\t Display time = %s ms\n", argv[i], argv[i + 1]);
+                    fprintf(stderr, "LED pattern = %8b \t Display time = %s ms\n", strtoul(argv[i], NULL, 0), argv[i + 1]);
                 }
                 /*
                 Do Stuff with FPGA Memory Here
@@ -168,7 +168,7 @@ void intHandler(int dummy)
                     Output2 = strtok(NULL, "\n");
                     if(vflag)
                     {
-                    fprintf(stderr, "LED Patterns = %s\t", Output);
+                    fprintf(stderr, "LED Patterns = %8b\t",strtoul(Output, NULL, 0));
                     fprintf(stderr, "Display time = %sms\n", Output2);
                     }
                     uint32_t VALUE = strtoul(Output, NULL, 0);
@@ -181,5 +181,5 @@ void intHandler(int dummy)
             }
         }
         *target_virtual_addr = 0;
-        fprintf(stderr, "\nProgram Ended\nThe system is now in Hardware Control Mode\n");
+        fprintf(stderr, "\nProgram Ended\nThe system is now in Hardware Control Mode\n\n");
     }
