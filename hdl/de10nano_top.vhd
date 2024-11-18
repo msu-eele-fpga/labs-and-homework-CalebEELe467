@@ -244,9 +244,6 @@ architecture de10nano_arch of de10nano_top is
       hps_io_hps_io_gpio_inst_gpio53  : inout std_logic;
       hps_io_hps_io_gpio_inst_gpio54  : inout std_logic;
       hps_io_hps_io_gpio_inst_gpio61  : inout std_logic;
-      led_patterns_push_button        : in std_logic;
-      led_patterns_switches           : in std_logic_vector(3 downto 0);
-      led_patterns_led                : out std_logic_vector(7 downto 0);
       memory_mem_a                    : out std_logic_vector(14 downto 0);
       memory_mem_ba                   : out std_logic_vector(2 downto 0);
       memory_mem_ck                   : out std_logic;
@@ -264,7 +261,10 @@ architecture de10nano_arch of de10nano_top is
       memory_mem_dm                   : out std_logic_vector(3 downto 0);
       memory_oct_rzqin                : in std_logic;
       clk_clk                         : in std_logic;
-      reset_reset_n                   : in std_logic
+      reset_reset_n                   : in std_logic;
+		pwm_outputs_red_output          : out   std_logic;                                        -- red_output
+      pwm_outputs_green_output        : out   std_logic;                                        -- green_output
+      pwm_outputs_blue_output         : out   std_logic 
     );
   end component soc_system;
 begin
@@ -332,10 +332,7 @@ begin
       -- HPS user I/O
       hps_io_hps_io_gpio_inst_gpio53 => hps_led,
       hps_io_hps_io_gpio_inst_gpio54 => hps_key,
-      led_patterns_push_button       => not push_button_n(0),
-      led_patterns_switches          => sw(3 downto 0),
-      led_patterns_led               => led(7 downto 0),
-
+  
       -- DDR3
       memory_mem_a       => hps_ddr3_addr,
       memory_mem_ba      => hps_ddr3_ba,
@@ -353,6 +350,10 @@ begin
       memory_mem_odt     => hps_ddr3_odt,
       memory_mem_dm      => hps_ddr3_dm,
       memory_oct_rzqin   => hps_ddr3_rzq,
+		
+		pwm_outputs_red_output         => gpio_0(0),                                        -- red_output
+      pwm_outputs_green_output      => gpio_0(1),                                       -- green_output
+      pwm_outputs_blue_output       => gpio_0(2),
 
       clk_clk       => fpga_clk1_50,
       reset_reset_n =>  push_button_n(1)
