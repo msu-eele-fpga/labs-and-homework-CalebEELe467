@@ -32,6 +32,20 @@ static int led_patterns_remove(struct platform_device *pdev)
 
     return 0;
 }
+
+/*
+ * Define the compatible property used for matching devices to this driver,
+ * then add our device id structure to the kernel's device table. For a device
+ * to be matched with this driver, its device tree node must use the same
+ * compatible string as defined here.
+ */
+static const struct of_device_id led_patterns_of_match[] = {
+    {
+        .compatible = "adsd,led_patterns",
+    },
+    {}};
+MODULE_DEVICE_TABLE(of, led_patterns_of_match);
+
 /*
  * struct led_patterns_driver - Platform driver struct for the led_patterns driver
  * @probe: Function that's called when a device is found
@@ -57,18 +71,6 @@ static struct platform_driver led_patterns_driver = {
 module_platform_driver(led_patterns_driver);
 
 MODULE_LICENSE("Dual MIT/GPL");
-MODULE_AUTHOR("Your Name");
+MODULE_AUTHOR("Caleb Binfet");
 MODULE_DESCRIPTION("led_patterns driver");
 
-/*
- * Define the compatible property used for matching devices to this driver,
- * then add our device id structure to the kernel's device table. For a device
- * to be matched with this driver, its device tree node must use the same
- * compatible string as defined here.
- */
-static const struct of_device_id led_patterns_of_match[] = {
-    {
-        .compatible = "adsd,led_patterns",
-    },
-    {}};
-MODULE_DEVICE_TABLE(of, led_patterns_of_match);

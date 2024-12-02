@@ -5,10 +5,10 @@ obj-m := hello-world.o
 else
 
 
-KDIR ?= /lib/modules/`uname -r`/build
+KDIR ?=../../../../../linux-socfpga 
 
 default:
-	$(MAKE) -C $(KDIR) M=$$PWD
+	$(MAKE) -C $(KDIR) ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- M=$$PWD
 
 clean:
 	$(MAKE) -C $(KDIR) M=$$PWD clean

@@ -1,5 +1,5 @@
-#include <../linux/init.h>
-#include <../linux/module.h>
+#include <linux/init.h>
+#include <linux/module.h>
 static int __init kernel_module_init(void) {
     printk(KERN_ALERT "Hello, world\n");
     return(0);

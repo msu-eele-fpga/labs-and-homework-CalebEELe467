@@ -1,11 +1,11 @@
 ifneq ($(KERNELRELEASE),)
 #kbuild part of make file
-obj-m := led_patterns.o
+obj-m := hello-world.o
 
 else
 
 
-KDIR ?=../../../../../linux-socfpga 
+KDIR ?=../../../../linux-socfpga 
 
 default:
 	$(MAKE) -C $(KDIR) ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- M=$$PWD
