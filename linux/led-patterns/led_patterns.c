@@ -6,6 +6,8 @@
 #include <linux/miscdevice.h> : miscdevice definitions
 #include <linux/types.h> : data types like u32, u16 etc.
 #include <linux/fs.h> : copy_to_user, etc.
+#include <linux/kstrtox.h> : kstrtou8, etc.
+
 
 #define HPS_LED_CONTROL_OFFSET 0
 #define BASE_PERIOD_OFFSET 4
@@ -245,6 +247,97 @@ static const struct of_device_id led_patterns_of_match[] = {
     {}};
 MODULE_DEVICE_TABLE(of, led_patterns_of_match);
 
+
+
+static ssize_t led_reg_show(struct device *dev,struct device_attribute *attr, char *buf)
+{
+    u8 led_reg;
+    struct led_patterns_dev *priv = dev_get_drvdata(dev);
+
+    led_reg = ioread32(priv->led_reg);
+
+    return scnprintf(buf, PAGE_SIZE, "%u\n", led_reg);
+}
+
+static ssize_t led_reg_store(struct device *dev,struct device_attribute *attr, const char *buf, size_t size)
+{
+    u8 led_reg;
+    int ret;
+    struct led_patterns_dev *priv = dev_get_drvdata(dev);
+
+    ret = kstrtou8(buf, 0, &led_reg);
+    if (ret < 0)
+        return ret;
+
+    iowrite32(led_reg, priv->led_reg);
+
+    return size;
+}
+
+static ssize_t hps_led_control_show(struct device *dev,
+                                    struct device_attribute *attr, char *buf)
+{
+    bool hps_control;
+    struct led_patterns_dev *priv = dev_get_drvdata(dev);
+
+    hps_control = ioread32(priv->hps_led_control);
+
+    return scnprintf(buf, PAGE_SIZE, "%u\n", hps_control);
+}
+
+static ssize_t hps_led_control_store(struct device *dev,struct device_attribute *attr, const char *buf, size_t size)
+{
+    bool hps_control;
+    int ret;
+    struct led_patterns_dev *priv = dev_get_drvdata(dev);
+
+    ret = kstrtobool(buf, &hps_control);
+    if (ret < 0)
+        return ret;
+
+    iowrite32(hps_control, priv->hps_led_control);
+
+    return size;
+}
+
+static ssize_t base_period_show(struct device *dev,struct device_attribute *attr, char *buf)
+{
+    u8 base_period;
+    struct led_patterns_dev *priv = dev_get_drvdata(dev);
+
+    base_period = ioread32(priv->base_period);
+
+    return scnprintf(buf, PAGE_SIZE, "%u\n", base_period);
+}
+
+static ssize_t base_period_store(struct device *dev,struct device_attribute *attr, const char *buf, size_t size)
+{
+    u8 base_period;
+    int ret;
+    struct led_patterns_dev *priv = dev_get_drvdata(dev);
+
+    ret = kstrtou8(buf, 0, &base_period);
+    if (ret < 0)
+        return ret;
+
+    iowrite32(base_period, priv->base_period);
+
+    return size;
+}
+
+
+static DEVICE_ATTR_RW(hps_led_control);
+static DEVICE_ATTR_RW(base_period);
+static DEVICE_ATTR_RW(led_reg);
+
+static struct attribute *led_patterns_attrs[] = {
+    &dev_attr_hps_led_control.attr,
+    &dev_attr_base_period.attr,
+    &dev_attr_led_reg.attr,
+    NULL,
+};
+ATTRIBUTE_GROUPS(led_patterns);
+
 /*
  * struct led_patterns_driver - Platform driver struct for the led_patterns driver
  * @probe: Function that's called when a device is found
@@ -260,8 +353,10 @@ static struct platform_driver led_patterns_driver = {
         .owner = THIS_MODULE,
         .name = "led_patterns",
         .of_match_table = led_patterns_of_match,
+        .dev_groups = led_patterns_groups,
     },
 };
+
 
 /*
  * We don't need to do anything special in module init/exit.
