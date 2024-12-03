@@ -5,7 +5,7 @@ obj-m := hello-world.o
 else
 
 
-KDIR ?=../../../../linux-socfpga 
+KDIR ?=../../../../../linux-socfpga 
 
 default:
 	$(MAKE) -C $(KDIR) ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- M=$$PWD

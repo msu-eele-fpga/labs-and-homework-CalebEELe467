@@ -50,7 +50,8 @@ int main () {
 	ret = fwrite(&val, 4, 1, file);
 	// We need to "flush" so the OS finishes writing to the file before our code continues.
 	fflush(file);
-
+	while(1)
+	{
 	// Write some values to the LEDs
 	printf("writing patterns to LEDs....\n");
 	val = 0x55;
@@ -66,7 +67,7 @@ int main () {
 	fflush(file);
 
 	sleep(1);
-
+	}
 	val = 0xff;
     ret = fseek(file, LED_REG_OFFSET, SEEK_SET);
 	ret = fwrite(&val, 4, 1, file);
