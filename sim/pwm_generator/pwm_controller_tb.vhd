@@ -33,7 +33,7 @@ architecture testbench of pwm_controller_tb is
 
   signal clk_tb        : std_logic                     := '0';
   signal rst_tb        : std_logic                     := '0';
-  signal period_tb     : unsigned(29 downto 0)         := "000010000000000000000000000000";
+  signal period_tb     : unsigned(29 downto 0)         := "000001000000000000000000000000";
   signal duty_cycle_tb : std_logic_vector(18 downto 0) := "0110000000000000000";
   signal output_tb     : std_logic                     := '0';
 begin
@@ -50,7 +50,7 @@ begin
 
     testing : process is
     begin
-      wait_for_clock_edges(clk_tb, 210000);
+      wait_for_clock_edges(clk_tb, 21000000);
       rst_tb <= '1';
       wait_for_clock_edges(clk_tb, 1000);
       period_tb(29 downto 24) <= to_unsigned(5, 6);

@@ -21,29 +21,21 @@ entity pwm_controller is
 end entity pwm_controller;
 
 architecture pwm_controller_arch of pwm_controller is
-  constant counts_per_ms        : integer               := 1 ms / clk_period; -- Set to 1 sec / clk_period
-  constant precision_duty_cycle : integer               := 262144;
-  constant devisior             : unsigned(27 downto 0) := to_unsigned(87960930, 28);
-  signal duty_cycle_time        : unsigned(48 downto 0); -- W.F format = 49.42
-
-  signal PERIOD_LIMIT_whole     : integer;
-  signal PERIOD_LIMIT_FRACT     : integer;
-  signal PERIOD_LIMIT_TOTAL     : integer;
-  signal DUTY_CYCLE_LIMIT_WHOLE : integer;
-  signal DUTY_CYCLE_LIMIT_FRACT : integer;
-  signal DUTY_CYCLE_LIMIT_TOT   : integer;
-  signal count                  : integer := 0;
+  constant counts_per_ms          : integer := 1 ms / clk_period; -- clock cycles / ms
+  signal duty_cycle_time          : unsigned(48 downto 0); -- W.F format = 49.42
+  signal PERIOD_LIMIT_TOTAL       : unsigned(45 downto 0);
+  signal PERIOD_LIMIT_TOTAL_INT   : integer := 0;
+  signal DUTY_CYCLE_LIMIT_TOT     : unsigned(64 downto 0);
+  signal DUTY_CYCLE_LIMIT_TOT_INT : integer := 0;
+  signal count                    : integer := 0;
 begin
 
   process (clk, period, duty_cycle)
   begin
-    PERIOD_LIMIT_whole     <= (to_integer(period(29 downto 24)) * counts_per_ms);
-    PERIOD_LIMIT_FRACT     <= (to_integer(period(23 downto 0)) / 336);
-    PERIOD_LIMIT_TOTAL     <= PERIOD_LIMIT_FRACT + PERIOD_LIMIT_whole;
-    duty_cycle_time        <= unsigned(duty_cycle) * period;
-    DUTY_CYCLE_LIMIT_WHOLE <= (to_integer(duty_cycle_time(48 downto 42))) * counts_per_ms;
-    DUTY_CYCLE_LIMIT_FRACT <= to_integer(duty_cycle_time(41 downto 0) / devisior);
-    DUTY_CYCLE_LIMIT_TOT   <= DUTY_CYCLE_LIMIT_WHOLE + DUTY_CYCLE_LIMIT_FRACT;
+    PERIOD_LIMIT_TOTAL       <= period * to_unsigned(counts_per_ms, 16);
+    PERIOD_LIMIT_TOTAL_INT   <= to_integer(PERIOD_LIMIT_TOTAL(45 downto 23));
+    DUTY_CYCLE_LIMIT_TOT     <= period * unsigned(duty_cycle) * to_unsigned(counts_per_ms, 16);
+    DUTY_CYCLE_LIMIT_TOT_INT <= to_integer(DUTY_CYCLE_LIMIT_TOT(64 downto 42));
   end process;
 
   process (clk, rst)
@@ -55,12 +47,12 @@ begin
       count <= count + 1;
       if (duty_cycle(18) = '1') then
         output       <= '1';
-      elsif (count <= DUTY_CYCLE_LIMIT_TOT) then
+      elsif (count <= DUTY_CYCLE_LIMIT_TOT_INT) then
         output       <= '1';
       else
         output <= '0';
       end if;
-      if (count = PERIOD_LIMIT_TOTAL) then
+      if (count = PERIOD_LIMIT_TOTAL_INT) then
         count <= 0;
       else
       end if;
